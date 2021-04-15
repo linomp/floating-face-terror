@@ -15,7 +15,12 @@ body {
 }
 
 canvas {
-    position: absolute;
+  position: absolute;
+  margin-bottom: 8em;
+}
+
+#video{
+  margin-bottom: 8em;
 }
 
 .content {
