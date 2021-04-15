@@ -8,25 +8,22 @@
     <title>Face Detect JS</title>
     <script defer src="face-api.min.js"></script>
     <script defer src="script.js"></script>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            width: 100vw;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        canvas {
-            position: absolute;
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <video id="video" width="720" height="560" autoplay muted></video>
+    <video id="video" width="720" height="560" autoplay muted>
+    </video>
+
+    <div class="content">
+        <button id="btn" disabled>Click on the page</button>
+        <br>
+        <br>
+        <input type="checkbox" id="expressions">Expressions</input>
+        <input type="checkbox" id="landmarks" checked>Landmarks</input>
+        <input type="checkbox" id="detections" checked>Detections</input>
+        <input type="checkbox" id="retain">Retain</input>
+    </div>
 </body>
 
 </html>
