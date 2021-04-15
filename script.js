@@ -35,10 +35,10 @@ retainCheckbox.addEventListener('change', function () {
 
 // Load the models
 Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri('/weights'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('/weights'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('/weights'),
-    faceapi.nets.faceExpressionNet.loadFromUri('/weights')
+    faceapi.nets.tinyFaceDetector.loadFromUri('./weights'),
+    faceapi.nets.faceLandmark68Net.loadFromUri('./weights'),
+    faceapi.nets.faceRecognitionNet.loadFromUri('./weights'),
+    faceapi.nets.faceExpressionNet.loadFromUri('./weights')
 ]).then(startVideo)
 
 // Hook up webcam stream

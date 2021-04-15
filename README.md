@@ -5,8 +5,9 @@
 
 Fun with face recognition in the browser, with face-api.js
 
-Check out the live version.
+Check out the [live version](https://linomp.github.io/floating-face-terror/).
 
+To run locally, open root folder in VS Code and open `index.html` with `LiveServer`.
 
 ## Sources
 - Code is based on: https://youtu.be/CVClHLwv-4I
