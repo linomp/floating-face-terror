@@ -1,59 +1,38 @@
-const video = document.getElementById('video')
+const expressionsCheckbox = document.getElementById('expressions')
+const landmarksCheckbox = document.getElementById('landmarks')
+const detectionsCheckbox = document.getElementById('detections')
+const retainCheckbox = document.getElementById('retain')
 const btn = document.getElementById('btn')
-btn.disabled = true
+const video = document.getElementById('video')
 
 let started = false
-let retain = false
 
+let retain = false
 let drawLandmarks = true
 let drawDetections = true
 let drawExpressions = false
 
-const expressionsCheckbox = document.getElementById('expressions')
 expressionsCheckbox.checked = drawExpressions;
 expressionsCheckbox.addEventListener('change', function () {
     drawExpressions = this.checked
 });
 
-const landmarksCheckbox = document.getElementById('landmarks')
 landmarksCheckbox.checked = drawLandmarks;
 landmarksCheckbox.addEventListener('change', function () {
     drawLandmarks = this.checked
 });
 
-const detectionsCheckbox = document.getElementById('detections')
 detectionsCheckbox.checked = drawDetections;
 detectionsCheckbox.addEventListener('change', function () {
     drawDetections = this.checked
 });
 
-const retainCheckbox = document.getElementById('retain')
 retainCheckbox.checked = retain;
 retainCheckbox.addEventListener('change', function () {
     retain = this.checked
 });
 
-// Load the models
-Promise.all([
-    faceapi.nets.tinyFaceDetector.loadFromUri('./weights'),
-    faceapi.nets.faceLandmark68Net.loadFromUri('./weights'),
-    faceapi.nets.faceRecognitionNet.loadFromUri('./weights'),
-    faceapi.nets.faceExpressionNet.loadFromUri('./weights')
-]).then(startVideo)
-
-// Hook up webcam stream
-function startVideo() {
-    navigator.mediaDevices.getUserMedia({ video: true }).then(
-        stream => {
-            video.srcObject = stream;
-        }).catch(
-            err => {
-                window.alert("Please enable the camera")
-                location.reload();
-            }
-        )
-}
-
+btn.disabled = true
 btn.addEventListener('click', () => {
     if (started) {
         started = false
@@ -66,18 +45,14 @@ btn.addEventListener('click', () => {
     }
 })
 
-function updateButton(ready) {
-    if (ready && !started) {
-        btn.textContent = "Start"
-        btn.disabled = false;
-    }
-}
-
+// Main video loop
 video.addEventListener('play', () => {
     const canvas = faceapi.createCanvasFromMedia(video)
     document.body.append(canvas)
+
     const displaySize = { width: video.width, height: video.height }
     faceapi.matchDimensions(canvas, displaySize)
+
     btn.textContent = "Loading..."
 
     setInterval(async () => {
@@ -116,3 +91,32 @@ video.addEventListener('play', () => {
 
     }, 30)
 })
+
+// to enable Start button when face detection is ready
+function updateButton(ready) {
+    if (ready && !started) {
+        btn.textContent = "Start"
+        btn.disabled = false;
+    }
+}
+
+// to hook up webcam stream
+function startVideo() {
+    navigator.mediaDevices.getUserMedia({ video: true }).then(
+        stream => {
+            video.srcObject = stream;
+        }).catch(
+            err => {
+                window.alert("Please enable the camera")
+                location.reload();
+            }
+        )
+}
+
+// Load the models and start video
+Promise.all([
+    faceapi.nets.tinyFaceDetector.loadFromUri('./weights'),
+    faceapi.nets.faceLandmark68Net.loadFromUri('./weights'),
+    faceapi.nets.faceRecognitionNet.loadFromUri('./weights'),
+    faceapi.nets.faceExpressionNet.loadFromUri('./weights')
+]).then(startVideo)
