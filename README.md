@@ -3,7 +3,7 @@
 ![demo](./sample.png)
 
 
-Fun with face recognition in the browser, with face-api.js
+Fun with face recognition in the browser, using face-api.js
 
 Check out the [live version](https://linomp.github.io/floating-face-terror/).
 
@@ -15,4 +15,4 @@ To run locally, open root folder in VS Code and open `index.html` with `LiveServ
 
 - [How to download and use face-api.js library](https://itnext.io/face-api-js-javascript-api-for-face-recognition-in-the-browser-with-tensorflow-js-bcc2a6c4cf07)
 
-- [`getUserMedia` documentation](https://developer.mozilla.org/es/docs/Web/API/MediaDevices/getUserMedia)
+- [`MediaDevices.getUserMedia` documentation](https://developer.mozilla.org/es/docs/Web/API/MediaDevices/getUserMedia)
